@@ -1,3 +1,4 @@
+import "dotenv/config";
 import {
   devices,
   defineConfig,
@@ -24,7 +25,7 @@ if (process.env.VIEWPORT) {
     .split("x")
     .map(Number);
   projectsConfig.push({
-    name: "Custom viewport",
+    name: `${browser} (custom viewport)`,
     use: {
       ...devices[browser],
       viewport: { width, height },
@@ -42,7 +43,7 @@ if (process.env.VIEWPORT) {
     browserType = null;
 
   projectsConfig.push({
-    name: "Wopee device",
+    name: `${deviceKey}${browser ? ` (${browserType})` : ""}`,
     use: {
       ...device,
       ...(browserType && {
@@ -53,7 +54,7 @@ if (process.env.VIEWPORT) {
   });
 } else {
   projectsConfig.push({
-    name: "Default browser",
+    name: `${browser} (default)`,
     use: {
       ...devices[browser],
       headless: true,
